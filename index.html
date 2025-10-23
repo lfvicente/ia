@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Luis F. Vicente — CV</title>
+  <meta name="description" content="Luis Felipe Vicente Díez — Profesional TIC especializado en desarrollo y gestión tecnológica. Madrid." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <style>
+    :root{
+      --bg: #0d1117;
+      --card: #0f1721;
+      --muted: #94a3b8;
+      --accent: #06b6d4;
+      --glass: rgba(255,255,255,0.03);
+      --text: #e6eef6;
+      --radius: 12px;
+      --max-w: 1000px;
+      --gap: 20px;
+      --shadow: 0 8px 24px rgba(2,6,23,0.6);
+    }
+
+    /* Light theme variables (switched with [data-theme="light"]) */
+    [data-theme="light"]{
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --muted: #475569;
+      --accent: #0b74ff;
+      --glass: rgba(2,6,23,0.02);
+      --text: #0b1220;
+      --shadow: 0 8px 24px rgba(11,17,34,0.06);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, rgba(6,182,212,0.03), transparent), var(--bg);
+      color:var(--text);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--max-w);
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:var(--gap);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      padding:26px;
+      border-radius:16px;
+      box-shadow: var(--shadow);
+    }
+
+    /* SIDEBAR */
+    aside{
+      background:var(--card);
+      padding:18px;
+      border-radius:12px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .photo{
+      width:100%;
+      height:220px;
+      border-radius:10px;
+      background: linear-gradient(135deg,var(--accent), #1e3a8a);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-size:32px;
+      color:#021018;
+      box-shadow: 0 6px 18px rgba(6,182,212,0.12);
+    }
+
+    .name{ font-size:20px; font-weight:700; margin:6px 0 2px; }
+    .title{ color:var(--muted); margin:0 0 6px; font-size:13px; }
+
+    .info-block{ background:var(--glass); padding:12px; border-radius:10px; }
+    .info-block h4{ margin:0 0 8px 0; font-size:13px; color:var(--muted); }
+    .info-block p{ margin:0; font-size:14px; color:var(--text); line-height:1.4; }
+
+    .contact a{ color:var(--accent); text-decoration:none; font-weight:600; display:inline-flex; gap:8px; align-items:center; }
+    .contact p{ margin:6px 0; color:var(--text); font-size:14px; }
+
+    .chip{ display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,0.03); font-size:13px; margin:6px 6px 0 0; color:var(--text); }
+
+    /* MAIN */
+    main{
+      padding:12px 4px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .top-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+
+    .controls{ display:flex; gap:10px; align-items:center; }
+
+    .toggle{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      padding:8px 10px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:13px;
+    }
+    [data-theme="light"] .toggle{ border-color: rgba(11,17,34,0.06); }
+
+    section.card{
+      background:var(--card);
+      padding:16px;
+      border-radius:12px;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.04);
+      transition: transform 240ms ease;
+    }
+    section.card:hover{ transform: translateY(-4px); }
+
+    h2.section-title{ margin:0 0 8px; font-size:18px; }
+    .item{ display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px dashed rgba(255,255,255,0.03); }
+    .item:last-child{ border-bottom:0; }
+    .item .left{ max-width:74%; }
+    .job-title{ font-weight:700; margin:0; font-size:15px; color:var(--text); }
+    .meta{ color:var(--muted); font-size:13px; margin-top:6px; }
+    .dates{ text-align:right; color:var(--muted); font-size:13px; min-width:120px; }
+
+    .skills{ display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+    .skill{ background:rgba(255,255,255,0.03); padding:8px 10px; border-radius:8px; font-size:13px; }
+
+    footer{ text-align:center; color:var(--muted); font-size:13px; margin-top:6px; }
+
+    /* Mobile */
+    @media (max-width:920px){
+      .container{ grid-template-columns: 1fr; padding:16px; gap:12px; }
+      .photo{ height:96px; font-size:20px; }
+      aside{ flex-direction:row; align-items:center; gap:12px; padding:12px; }
+      aside > .left-col{ display:none; } /* optional layout tweak */
+    }
+
+    /* Print */
+    @media print{
+      body{ background:white; color:black; }
+      .toggle, .controls{ display:none; }
+      .container{ box-shadow:none; background:transparent; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="site" data-theme="dark">
+    <!-- SIDEBAR -->
+    <aside aria-label="Ficha">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <div class="photo" id="photo">LFV</div>
+        <div style="flex:1">
+          <p class="name">Luis Felipe Vicente Díez</p>
+          <p class="title">Profesional TIC especializado en desarrollo y gestión tecnológica</p>
+          <div style="margin-top:10px">
+            <span class="chip">Análisis de software</span>
+            <span class="chip">Programación</span>
+            <span class="chip">Telecomunicaciones</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-block" style="margin-top:6px">
+        <h4>Contacto</h4>
+        <div class="contact">
+          <p><a href="mailto:lfvicente@gmail.com" id="mail"><i data-feather="mail"></i> lfvicente@gmail.com</a></p>
+          <p><a href="https://www.linkedin.com/in/lfvicente" target="_blank" rel="noopener noreferrer"><i data-feather="linkedin"></i> linkedin.com/in/lfvicente</a></p>
+          <p style="margin-top:8px;color:var(--muted);font-size:13px">Madrid, Comunidad de Madrid, España</p>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <h4>Certificaciones</h4>
+        <p style="margin:6px 0 0 0;font-size:14px">
+          Cloud Computing · Agile Programming · Endpoint Security · Ethical Hacker · Intro to Cybersecurity
+        </p>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main>
+      <div class="top-row">
+        <h1 style="margin:0;font-size:20px">Currículum — Luis F. Vicente</h1>
+        <div class="controls">
+          <button class="toggle" id="themeToggle" title="Cambiar modo">
+            <span id="themeIcon"><i data-feather="moon"></i></span>
+            <span id="themeLabel" style="font-weight:600">Oscuro</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Perfil -->
+      <section class="card" aria-labelledby="perfilTitle">
+        <h2 class="section-title" id="perfilTitle">Perfil</h2>
+        <p style="margin:0;color:var(--text)">Profesional TIC con experiencia consolidada en desarrollo y gestión tecnológica en la Administración pública. Enfocado en soluciones que optimizan procesos, seguridad y comunicación entre sistemas.</p>
+      </section>
+
+      <!-- Experiencia -->
+      <section class="card" aria-labelledby="expTitle">
+        <h2 class="section-title" id="expTitle">Experiencia</h2>
+
+        <div class="item">
+          <div class="left">
+            <p class="job-title">Jefe de Sección — Ministerio de la Presidencia</p>
+            <p class="meta">Responsable de coordinación técnica y operativa del área; liderazgo de equipos y proyectos administrativos.</p>
+          </div>
+          <div class="dates">ago. 2023 — Actualidad</div>
+        </div>
+
+        <div class="item">
+          <div class="left">
+            <p class="job-title">Analista de Sistemas — Ministerio para la Transición Ecológica y el Reto Demográfico</p>
+            <p class="meta">Análisis, soporte y evolución de sistemas durante procesos de transformación digital.</p>
+          </div>
+          <div class="dates">mar. 2022 — jul. 2023</div>
+        </div>
+
+        <div class="item">
+          <div class="left">
+            <p class="job-title">Analista Programador — Ministerio para la Transición Ecológica y el Reto Demográfico</p>
+            <p class="meta">Desarrollo y mantenimiento de aplicaciones internas y servicios integrados.</p>
+          </div>
+          <div class="dates">feb. 2021 — mar. 2022</div>
+        </div>
+
+        <div class="item">
+          <div class="left">
+            <p class="job-title">Técnico Auxiliar Informático — Ministerio para la Transición Ecológica y el Reto Demográfico</p>
+            <p class="meta">Soporte técnico, administración y tareas de implantación de herramientas.</p>
+          </div>
+          <div class="dates">mar. 2019 — feb. 2021</div>
+        </div>
+
+        <div class="item">
+          <div class="left">
+            <p class="job-title">Programador de Aplicaciones — Informática del Ayuntamiento de Madrid</p>
+            <p class="meta">Desarrollos para la Subdirección General de Comunicaciones; integración de soluciones municipales.</p>
+          </div>
+          <div class="dates">oct. 2008 — feb. 2019</div>
+        </div>
+
+        <div class="item">
+          <div class="left">
+            <p class="job-title">Desarrollador de Software — Tecnocom</p>
+            <p class="meta">Proyectos para la Administración Pública: Ayuntamiento de Madrid, Correos, Ministerio de Educación y Hacienda.</p>
+          </div>
+          <div class="dates">ago. 2001 — oct. 2008</div>
+        </div>
+
+        <div class="item">
+          <div class="left">
+            <p class="job-title">Desarrollador de Software — ABS</p>
+            <p class="meta">Participación en proyectos para INEM y Mercedes Benz.</p>
+          </div>
+          <div class="dates">nov. 2000 — jul. 2001</div>
+        </div>
+      </section>
+
+      <!-- Educación / Skills -->
+      <section class="card" aria-labelledby="eduTitle">
+        <h2 class="section-title" id="eduTitle">Formación y habilidades</h2>
+
+        <div style="display:flex;flex-wrap:wrap;gap:18px;">
+          <div style="flex:1;min-width:240px;">
+            <p style="margin:0;font-weight:700">Formación</p>
+            <p class="meta" style="margin-top:6px">(Añade aquí tu titulación principal — por ejemplo: Ingeniería / Grado en Informática o similar)</p>
+          </div>
+
+          <div style="flex:1;min-width:240px;">
+            <p style="margin:0;font-weight:700">Habilidades principales</p>
+            <div class="skills" aria-hidden="false">
+              <div class="skill">Análisis de software</div>
+              <div class="skill">Programación</div>
+              <div class="skill">Telecomunicaciones</div>
+              <div class="skill">Seguridad</div>
+              <div class="skill">Gestión de proyectos</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Certificaciones -->
+      <section class="card" aria-labelledby="certTitle">
+        <h2 class="section-title" id="certTitle">Certificaciones</h2>
+        <p style="margin:0">Cloud Computing · Agile Programming · Endpoint Security · Ethical Hacker · Introduction to Cybersecurity</p>
+      </section>
+
+      <footer>
+        <small>Datos extraídos de tu CV subido. :contentReference[oaicite:1]{index=1} • © 2025 Luis F. Vicente</small>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Replace icons
+    feather.replace();
+
+    // Theme toggle (persists in localStorage)
+    (function(){
+      const site = document.getElementById('site');
+      const toggle = document.getElementById('themeToggle');
+      const label = document.getElementById('themeLabel');
+      const iconWrap = document.getElementById('themeIcon');
+
+      // load saved theme
+      const saved = localStorage.getItem('cv_theme') || 'dark';
+      site.setAttribute('data-theme', saved);
+      updateLabel(saved);
+
+      toggle.addEventListener('click', () => {
+        const current = site.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        site.setAttribute('data-theme', current);
+        localStorage.setItem('cv_theme', current);
+        updateLabel(current);
+      });
+
+      function updateLabel(theme){
+        if(theme === 'dark'){
+          label.textContent = 'Oscuro';
+          iconWrap.innerHTML = '<i data-feather="moon"></i>';
+        } else {
+          label.textContent = 'Claro';
+          iconWrap.innerHTML = '<i data-feather="sun"></i>';
+        }
+        feather.replace();
+      }
+    })();
+
+    // small enhancement: allow clicking email/phone to copy
+    document.getElementById('mail').addEventListener('click', (e)=>{
+      // default mailto opens; do nothing extra
+    });
+  </script>
+</body>
+</html>
