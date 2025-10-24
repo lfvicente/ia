@@ -10,6 +10,10 @@
       background: black;
       color: #00ff00;
       font-family: 'Courier New', monospace;
+      transition: all 1s ease-in-out;
+    }
+    header, section, footer, h2, a {
+      transition: all 1s ease-in-out;
     }
     header {
       text-align: center;
@@ -65,8 +69,8 @@
 
 <section>
   <h2>📬 Contacto</h2>
-  <p>Email: <a href="mailto:lfvicente@gmail.com">lfvicente@gmail.com</a><br>
-     LinkedIn: <a href="https://www.linkedin.com/in/lfvicente" target="_blank">linkedin.com/in/lfvicente</a></p>
+  <p>Email: <a href="mailto:lfvicente@gmail.com">lfvicente@gmail.com</a></p>
+  <p>LinkedIn: <a href="https://linkedin.com/in/lfvicente">linkedin.com/in/lfvicente</a></p>
 </section>
 
 <section>
@@ -92,17 +96,13 @@
 <section>
   <h2>💼 Experiencia profesional</h2>
   <ul>
-    <li><strong>Ministerio de la Presidencia</strong> – Jefe de sección (ago 2023 - Presente)</li>
-    <li><strong>Ministerio para la Transición Ecológica</strong>
-      <ul>
-        <li>Analista de sistemas (mar 2022 - jul 2023)</li>
-        <li>Analista Programador (feb 2021 - mar 2022)</li>
-        <li>Técnico Auxiliar Informático (mar 2019 - feb 2021)</li>
-      </ul>
-    </li>
-    <li><strong>Ayuntamiento de Madrid</strong> – Programador de aplicaciones (oct 2008 - feb 2019)</li>
-    <li><strong>Tecnocom</strong> – Desarrollador de software (ago 2001 - oct 2008)</li>
-    <li><strong>ABS</strong> – Desarrollador de software (nov 2000 - jul 2001)</li>
+    <li>Ministerio de la Presidencia – Jefe de sección (ago 2023 - Presente)</li>
+    <li>Ministerio para la Transición Ecológica – Analista de sistemas (mar 2022 - jul 2023)</li>
+    <li>Analista Programador (feb 2021 - mar 2022)</li>
+    <li>Técnico Auxiliar Informático (mar 2019 - feb 2021)</li>
+    <li>Ayuntamiento de Madrid – Programador de aplicaciones (oct 2008 - feb 2019)</li>
+    <li>Tecnocom – Desarrollador de software (ago 2001 - oct 2008)</li>
+    <li>ABS – Desarrollador de software (nov 2000 - jul 2001)</li>
   </ul>
 </section>
 
@@ -111,34 +111,73 @@
 </footer>
 
 <script>
-  // Matrix rain effect
-  const canvas = document.getElementById("matrix");
-  const ctx = canvas.getContext("2d");
+  const colors = [
+    { hex: '#00ff00', rgba: 'rgba(0, 255, 0, 0.1)' },
+    { hex: '#ffa500', rgba: 'rgba(255, 165, 0, 0.1)' },
+    { hex: '#00bfff', rgba: 'rgba(0, 191, 255, 0.1)' },
+    { hex: '#ffff00', rgba: 'rgba(255, 255, 0, 0.1)' }
+  ];
+
+  let index = 0;
+  let matrixColor = colors[0].hex;
+
+  function cycleColors() {
+    const color = colors[index];
+    matrixColor = color.hex;
+
+    document.body.style.color = color.hex;
+
+    document.querySelectorAll('section, header, footer').forEach(el => {
+      el.style.backgroundColor = color.rgba;
+      el.style.borderColor = color.hex;
+    });
+
+    document.querySelectorAll('h2').forEach(el => {
+      el.style.borderBottom = `1px solid ${color.hex}`;
+    });
+
+    document.querySelectorAll('a').forEach(el => {
+      el.style.color = color.hex;
+    });
+
+    index = (index + 1) % colors.length;
+  }
+
+  setInterval(cycleColors, 3000);
+
+  const canvas = document.getElementById('matrix');
+  const ctx = canvas.getContext('2d');
 
   canvas.height = window.innerHeight;
   canvas.width = window.innerWidth;
 
-  const letters = "01";
+  const letters = 'アァイィウヴエカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   const fontSize = 14;
   const columns = canvas.width / fontSize;
   const drops = Array(Math.floor(columns)).fill(1);
 
   function drawMatrix() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "#0F0";
-    ctx.font = fontSize + "px Courier";
+    ctx.fillStyle = matrixColor;
+    ctx.font = fontSize + 'px monospace';
 
     for (let i = 0; i < drops.length; i++) {
       const text = letters[Math.floor(Math.random() * letters.length)];
       ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-      drops[i] = (drops[i] * fontSize > canvas.height || Math.random() > 0.975) ? 0 : drops[i] + 1;
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i]++;
     }
+
+    requestAnimationFrame(drawMatrix);
   }
 
-  setInterval(drawMatrix, 50);
+  drawMatrix();
 </script>
 
 </body>
